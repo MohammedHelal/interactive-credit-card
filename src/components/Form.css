@@ -1,0 +1,105 @@
+form,
+.thank-you {
+  width: 450px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 2px solid var(--color-light-grayish-violet);
+  outline: none;
+}
+/*Linear gradient (active input border): hsl(249, 99%, 64%) to hsl(278, 94%, 30%);*/
+input:focus {
+  border: 3px double transparent;
+  border-radius: 8px;
+  background-image: linear-gradient(white, white),
+    linear-gradient(45deg, hsl(249, 99%, 64%), hsl(278, 94%, 30%));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+input::placeholder,
+.added-para {
+  color: var(--color-dark-grayish-violet);
+}
+
+.input-error {
+  border: 2px solid var(--color-red);
+}
+
+.name,
+.number,
+.cvc-exp {
+  margin-bottom: 15px;
+}
+
+.cvc-exp {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+#card-month,
+#card-year {
+  margin-right: 10px;
+  width: 120px;
+}
+
+#card-cvc {
+  width: 100%;
+}
+
+.submit-button {
+  margin-top: 20px;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-very-dark-violet);
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+  box-shadow: 5px 5px 2.5px var(--color-dark-grayish-violet);
+  transition: transform 0.5s box-shadow 0.5s;
+  font-size: 16px;
+}
+
+.submit-button:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0;
+}
+
+.thank-you {
+  text-align: center;
+}
+
+.thank-you h1 {
+  font-family: "Space Grotesk";
+  font-size: 1.8em;
+  letter-spacing: 5px;
+  margin-bottom: 5px;
+}
+
+.added-para {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 680px) {
+  form,
+  .thank-you {
+    width: 96vw;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  #card-month,
+  #card-year {
+    margin-right: 10px;
+    width: 80px;
+  }
+}
