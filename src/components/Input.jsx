@@ -1,46 +1,64 @@
 //import React from 'react'
 import PropTypes from "prop-types";
 
-function Input({ formInputs, setFormInputs, formErrors, setFormErrors }) {
+function Input({ setFormInputs, formErrors, setFormErrors }) {
   function inputBlurHandler(event) {
     let id = event.target.id;
-    let value;
+    let value = event.target.value;
     let val;
 
     switch (id) {
       case "card-name":
         setFormErrors((prevState) => ({
           ...prevState,
-          nameError: event.target.value === "",
+          nameError: value === "" ? "Name cannot be empty" : "",
         }));
         break;
       case "card-number":
-        value = event.target.value;
         val = value.replace(/\s/g, "");
         setFormErrors((prevState) => ({
           ...prevState,
-          numberError: val === "" || !/^\d+$/.test(val),
+          numberError:
+            val === ""
+              ? "Card number cannot be empty"
+              : !/^\d+$/.test(val)
+              ? "Card number must consist of only numbers"
+              : "",
         }));
         break;
       case "card-month":
         setFormErrors((prevState) => ({
           ...prevState,
           monthError:
-            event.target.value === "" || !/^\d+$/.test(event.target.value),
+            value === ""
+              ? "Month cannot be empty"
+              : !/^\d+$/.test(value)
+              ? "Month has to be only numbers"
+              : value > 12
+              ? "There is only 12 months in a year"
+              : "",
         }));
         break;
       case "card-year":
         setFormErrors((prevState) => ({
           ...prevState,
           yearError:
-            event.target.value === "" || !/^\d+$/.test(event.target.value),
+            value === ""
+              ? "Year cannot be empty"
+              : !/^\d+$/.test(value)
+              ? "Year has to be only numbers"
+              : "",
         }));
         break;
       case "card-cvc":
         setFormErrors((prevState) => ({
           ...prevState,
           cvcError:
-            event.target.value === "" || !/^\d+$/.test(event.target.value),
+            value === ""
+              ? "cvc cannot be empty"
+              : !/^\d+$/.test(value)
+              ? "cvc has to be only numbers"
+              : "",
         }));
         break;
     }
