@@ -1,4 +1,4 @@
-import "./Form.css";
+import "./ThankYou.css";
 import PropTypes from "prop-types";
 
 function ThankYou({ setIsSubmitted, setFormInputs }) {

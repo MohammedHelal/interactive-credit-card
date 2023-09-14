@@ -1,16 +1,11 @@
-//import React from "react";
 import "./Cards.css";
 import PropTypes from "prop-types";
 
 function Cards({ formInputs }) {
   return (
     <aside className="bg-left">
-      <img
-        className="front-card"
-        src="./images/bg-card-front.png"
-        alt="credit card front"
-      />
-      <div className="front-overlay">
+      {/*Front facing card section*/}
+      <div className="front-card">
         <img src="./images/card-logo.svg" alt="card-logo" />
         <div>
           <div className="credit-card-number">
@@ -29,12 +24,8 @@ function Cards({ formInputs }) {
           </div>
         </div>
       </div>
-      <img
-        className="back-card"
-        src="./images/bg-card-back.png"
-        alt="credit card front"
-      />
-      <div className="back-overlay">
+      {/*Back facing card section*/}
+      <div className="back-card">
         <p>{formInputs.cvc === "" ? "000" : formInputs.cvc}</p>
       </div>
     </aside>

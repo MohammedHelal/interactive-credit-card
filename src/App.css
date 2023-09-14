@@ -7,9 +7,21 @@
   align-items: center;
 }
 
-@media screen and (max-width: 680px) {
+form,
+.thank-you {
+  width: 450px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 400px) {
   .bg-right {
     width: 100vw;
     margin-top: 25vw;
+  }
+
+  form,
+  .thank-you {
+    width: 96vw;
   }
 }

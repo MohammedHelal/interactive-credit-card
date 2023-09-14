@@ -1,0 +1,14 @@
+.thank-you {
+  text-align: center;
+}
+
+.thank-you h1 {
+  font-family: "Space Grotesk";
+  font-size: 1.8em;
+  letter-spacing: 5px;
+  margin-bottom: 5px;
+}
+
+.added-para {
+  margin-bottom: 20px;
+}

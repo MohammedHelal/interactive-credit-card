@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./App.css";
-import Cards from "./components/Cards.jsx";
-import Form from "./components/Form.jsx";
-import ThankYou from "./components/ThankYou";
+import Cards from "./components/Cards/Cards.jsx";
+import Form from "./components/Form/Form.jsx";
+import ThankYou from "./components/ThankYou/ThankYou";
 
 function App() {
+  //form inputs state to be displayed on the cards
   const [formInputs, setFormInputs] = useState({
     name: "",
     number: "",
@@ -13,6 +14,7 @@ function App() {
     cvc: "",
   });
 
+  //State for the form submition to toggle between form and thank you components
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (

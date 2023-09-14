@@ -1,37 +1,50 @@
 //import React from 'react'
 import PropTypes from "prop-types";
 
-function Input({ setFormInputs, formErrors, setFormErrors }) {
+function Input({
+  setFormInputs,
+  formErrors,
+  setFormErrors,
+  id,
+  placeholder,
+  maxLength,
+  value,
+}) {
   function inputBlurHandler(event) {
     let id = event.target.id;
     let value = event.target.value;
     let val;
 
+    //switch case for error validation based on the id of the input
     switch (id) {
-      case "card-name":
+      case "name":
         setFormErrors((prevState) => ({
           ...prevState,
-          nameError: value === "" ? "Name cannot be empty" : "",
+          nameError: value === "" ? "Name can't be blank" : "",
         }));
         break;
-      case "card-number":
+      case "number":
+        //variable stores card number withouyt the spaces put in the card number every 4 charecters
         val = value.replace(/\s/g, "");
+        console.log(val);
         setFormErrors((prevState) => ({
           ...prevState,
           numberError:
             val === ""
-              ? "Card number cannot be empty"
+              ? "Card number can't be blank"
               : !/^\d+$/.test(val)
               ? "Card number must consist of only numbers"
+              : val.length < 16
+              ? "Card number must be 16 numbers"
               : "",
         }));
         break;
-      case "card-month":
+      case "month":
         setFormErrors((prevState) => ({
           ...prevState,
           monthError:
             value === ""
-              ? "Month cannot be empty"
+              ? "Month can't be blank"
               : !/^\d+$/.test(value)
               ? "Month has to be only numbers"
               : value > 12
@@ -39,23 +52,23 @@ function Input({ setFormInputs, formErrors, setFormErrors }) {
               : "",
         }));
         break;
-      case "card-year":
+      case "year":
         setFormErrors((prevState) => ({
           ...prevState,
           yearError:
             value === ""
-              ? "Year cannot be empty"
+              ? "Year can't be blank"
               : !/^\d+$/.test(value)
               ? "Year has to be only numbers"
               : "",
         }));
         break;
-      case "card-cvc":
+      case "cvc":
         setFormErrors((prevState) => ({
           ...prevState,
           cvcError:
             value === ""
-              ? "cvc cannot be empty"
+              ? "cvc can't be blank"
               : !/^\d+$/.test(value)
               ? "cvc has to be only numbers"
               : "",
@@ -67,24 +80,28 @@ function Input({ setFormInputs, formErrors, setFormErrors }) {
   function inputChangeHandler(event) {
     let id = event.target.id;
     let value = event.target.value;
+    //variable stores card number withouyt the spaces put in the card number every 4 charecters
     let val = value.replace(/\s/g, "");
 
+    //switch case for the input state change based on id
+    //the error for the input is reset when a user enters a key
     switch (id) {
-      case "card-name":
+      case "name":
         setFormErrors((prevState) => ({
           ...prevState,
-          nameError: false,
+          nameError: "",
         }));
         setFormInputs((prevState) => ({
           ...prevState,
           name: event.target.value,
         }));
         break;
-      case "card-number":
+      case "number":
         setFormErrors((prevState) => ({
           ...prevState,
-          numberError: false,
+          numberError: "",
         }));
+        //if statement to insert space after every 4th number
         if (val.length !== 16 && val.length % 4 == 0) {
           console.log(val.length);
           setFormInputs((prevState) => ({
@@ -98,30 +115,30 @@ function Input({ setFormInputs, formErrors, setFormErrors }) {
           }));
         }
         break;
-      case "card-month":
+      case "month":
         setFormErrors((prevState) => ({
           ...prevState,
-          monthError: false,
+          monthError: "",
         }));
         setFormInputs((prevState) => ({
           ...prevState,
           month: event.target.value,
         }));
         break;
-      case "card-year":
+      case "year":
         setFormErrors((prevState) => ({
           ...prevState,
-          yearError: false,
+          yearError: "",
         }));
         setFormInputs((prevState) => ({
           ...prevState,
           year: event.target.value,
         }));
         break;
-      case "card-cvc":
+      case "cvc":
         setFormErrors((prevState) => ({
           ...prevState,
-          cvcError: false,
+          cvcError: "",
         }));
         setFormInputs((prevState) => ({
           ...prevState,
@@ -133,10 +150,12 @@ function Input({ setFormInputs, formErrors, setFormErrors }) {
 
   return (
     <input
-      id="card-name"
-      className={formErrors.nameError ? "input-error" : ""}
+      id={id}
+      className={formErrors[`${id}Error`] ? "input-error" : ""}
       type="text"
-      placeholder="e.g. Jane Appleseed"
+      maxLength={maxLength}
+      value={value}
+      placeholder={placeholder}
       onChange={inputChangeHandler}
       onBlur={inputBlurHandler}
     />
@@ -148,6 +167,10 @@ Input.propTypes = {
   setFormInputs: PropTypes.func,
   formErrors: PropTypes.object,
   setFormErrors: PropTypes.func,
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  maxLength: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default Input;
